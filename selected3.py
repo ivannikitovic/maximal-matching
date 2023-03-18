@@ -22,6 +22,9 @@ def selected3(e: tuple[int], G: Graph):
         matching, False otherwise.
 
     """
+    global count
+    count += 1
+
     r_e = G.get_edge_random_value(e)
 
     adj_edges = G.get_adjacent_edges(e)
@@ -51,8 +54,12 @@ if __name__ == "__main__":
 
     maximal_matching_set = set()
 
+    count = 0
+
     for edge in edges:
         if selected3(edge, test):
             maximal_matching_set.add(frozenset(edge))
 
     print([list(edge) for edge in maximal_matching_set])
+
+    print(count)
