@@ -1,49 +1,54 @@
 from graph import Graph
 
-def selected4(e: tuple[int], G: Graph):
-    """
-    Inputs
-    --------------------
+class Algorithm4:
 
-    e: tuple
-        Denotes the edge to check whether it was selected
-        to the maximal matching. It contains two integers
-        denoting the vertices it connects.
+    def __init__(self) -> None:
+        self.count = 0
+        self.memo = {}
 
-    G: Graph
-        Graph represented by our graph class defined in
-        graph.py.
+    def selected4(self, e: tuple[int], G: Graph):
+        """
+        Inputs
+        --------------------
 
-    Outputs
-    --------------------
+        e: tuple
+            Denotes the edge to check whether it was selected
+            to the maximal matching. It contains two integers
+            denoting the vertices it connects.
 
-    selected: bool
-        True if given edge e was selected to the maximal
-        matching, False otherwise.
+        G: Graph
+            Graph represented by our graph class defined in
+            graph.py.
 
-    """
-    global memo, count
-    count += 1
+        Outputs
+        --------------------
 
-    r_e = G.get_edge_random_value(e)
+        selected: bool
+            True if given edge e was selected to the maximal
+            matching, False otherwise.
 
-    adj_edges = G.get_adjacent_edges(e)
-    adj_edges_sorted = sorted(adj_edges, key=G.get_edge_random_value)
+        """
+        self.count += 1
 
-    for i in range(len(adj_edges_sorted)):
-        r_e_i = G.get_edge_random_value(adj_edges_sorted[i])
+        r_e = G.get_edge_random_value(e)
 
-        if r_e_i < r_e:
-            if adj_edges_sorted[i] in memo:
-                selected = memo[adj_edges_sorted[i]]
-            else:
-                selected = selected4(adj_edges_sorted[i], G)
-                memo[adj_edges_sorted[i]] = selected
-            
-            if selected:
-                return False
+        adj_edges = G.get_adjacent_edges(e)
+        adj_edges_sorted = sorted(adj_edges, key=G.get_edge_random_value)
 
-    return True
+        for i in range(len(adj_edges_sorted)):
+            r_e_i = G.get_edge_random_value(adj_edges_sorted[i])
+
+            if r_e_i < r_e:
+                if adj_edges_sorted[i] in self.memo:
+                    selected = self.memo[adj_edges_sorted[i]]
+                else:
+                    selected = self.selected4(adj_edges_sorted[i], G)
+                    self.memo[adj_edges_sorted[i]] = selected
+                
+                if selected:
+                    return False
+
+        return True
 
 if __name__ == "__main__":
     test = Graph(5)
@@ -60,13 +65,12 @@ if __name__ == "__main__":
 
     maximal_matching_set = set()
 
-    memo = {}
-    count = 0
+    algorithm1 = Algorithm4()
 
     for edge in edges:
-        if selected4(edge, test):
+        if algorithm1.selected4(edge, test):
             maximal_matching_set.add(frozenset(edge))
 
     print([list(edge) for edge in maximal_matching_set])
 
-    print(count)
+    print(algorithm1.count)

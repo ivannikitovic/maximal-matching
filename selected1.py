@@ -1,43 +1,47 @@
 from graph import Graph
 
-def selected1(e: tuple[int], G: Graph):
-    """
-    Inputs
-    --------------------
+class Algorithm1:
 
-    e: tuple
-        Denotes the edge to check whether it was selected
-        to the maximal matching. It contains two integers
-        denoting the vertices it connects.
+    def __init__(self) -> None:
+        self.count = 0
 
-    G: Graph
-        Graph represented by our graph class defined in
-        graph.py.
+    def selected1(self, e: tuple[int], G: Graph):
+        """
+        Inputs
+        --------------------
 
-    Outputs
-    --------------------
+        e: tuple
+            Denotes the edge to check whether it was selected
+            to the maximal matching. It contains two integers
+            denoting the vertices it connects.
 
-    selected: bool
-        True if given edge e was selected to the maximal
-        matching, False otherwise.
+        G: Graph
+            Graph represented by our graph class defined in
+            graph.py.
 
-    """
-    global count
-    count += 1
-    
-    selected = True
-    r_e = G.get_edge_random_value(e)
+        Outputs
+        --------------------
 
-    adj_edges = G.get_adjacent_edges(e)
+        selected: bool
+            True if given edge e was selected to the maximal
+            matching, False otherwise.
 
-    for edge in adj_edges:
-        r_e_prime = G.get_edge_random_value(edge)
+        """
+        self.count += 1
+        
+        selected = True
+        r_e = G.get_edge_random_value(e)
 
-        if r_e_prime < r_e:
-            if selected1(edge, G):
-                selected = False
+        adj_edges = G.get_adjacent_edges(e)
 
-    return selected
+        for edge in adj_edges:
+            r_e_prime = G.get_edge_random_value(edge)
+
+            if r_e_prime < r_e:
+                if self.selected1(edge, G):
+                    selected = False
+
+        return selected
 
 if __name__ == "__main__":
     test = Graph(5)
@@ -54,12 +58,12 @@ if __name__ == "__main__":
 
     maximal_matching_set = set()
 
-    count = 0
+    algorithm1 = Algorithm1()
 
     for edge in edges:
-        if selected1(edge, test):
+        if algorithm1.selected1(edge, test):
             maximal_matching_set.add(frozenset(edge))
 
     print([list(edge) for edge in maximal_matching_set])
 
-    print(count)
+    print(algorithm1.count)
