@@ -70,6 +70,8 @@ class Graph:
         if seed:
             random.seed(seed)
 
+        self.r = [[0 for _ in range(self.n)] for _ in range(self.n)]
+
         for i in range(self.n):
             for j in range(self.n):
                 if j > i:
