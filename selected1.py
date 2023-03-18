@@ -27,8 +27,6 @@ class Algorithm1:
             matching, False otherwise.
 
         """
-        self.count += 1
-        
         selected = True
         r_e = G.get_edge_random_value(e)
 
@@ -38,6 +36,7 @@ class Algorithm1:
             r_e_prime = G.get_edge_random_value(edge)
 
             if r_e_prime < r_e:
+                self.count += 1
                 if self.selected1(edge, G):
                     selected = False
 

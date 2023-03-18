@@ -28,8 +28,6 @@ class Algorithm4:
             matching, False otherwise.
 
         """
-        self.count += 1
-
         r_e = G.get_edge_random_value(e)
 
         adj_edges = G.get_adjacent_edges(e)
@@ -42,6 +40,7 @@ class Algorithm4:
                 if adj_edges_sorted[i] in self.memo:
                     selected = self.memo[adj_edges_sorted[i]]
                 else:
+                    self.count += 1
                     selected = self.selected4(adj_edges_sorted[i], G)
                     self.memo[adj_edges_sorted[i]] = selected
                 

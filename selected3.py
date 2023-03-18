@@ -27,8 +27,6 @@ class Algorithm3:
             matching, False otherwise.
 
         """
-        self.count += 1
-
         r_e = G.get_edge_random_value(e)
 
         adj_edges = G.get_adjacent_edges(e)
@@ -38,6 +36,7 @@ class Algorithm3:
             r_e_i = G.get_edge_random_value(adj_edges_sorted[i])
 
             if r_e_i < r_e:
+                self.count += 1
                 if self.selected3(adj_edges_sorted[i], G):
                     return False
 
