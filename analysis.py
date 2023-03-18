@@ -11,18 +11,17 @@ num_nodes = 30
 max_degree = 5
 num_trials = 10
 
-algo1 = []
-algo2 = []
-algo3 = []
-algo4 = []
+algo1 = [0 for i in range(max_degree)]
+algo2 = [0 for i in range(max_degree)]
+algo3 = [0 for i in range(max_degree)]
+algo4 = [0 for i in range(max_degree)]
 
 for degree in range(1, max_degree+1):
     graph = Graph(num_nodes)
-    graph.assign_random_values_to_edges()
-
+    graph.generate_random_graph(degree)
+    
     for i in range(num_trials):
-
-        graph.generate_random_graph(degree)
+        graph.assign_random_values_to_edges()
 
         edges = graph.get_all_edges()
         random.shuffle(edges)
@@ -38,10 +37,10 @@ for degree in range(1, max_degree+1):
             algorithm3.selected3(edge, graph)
             algorithm4.selected4(edge, graph)
 
-        algo1.append(algorithm1.count // num_trials)    
-        algo2.append(algorithm2.count // num_trials)   
-        algo3.append(algorithm3.count // num_trials)   
-        algo4.append(algorithm4.count // num_trials)   
+        algo1[degree-1] += algorithm1.count // num_trials   
+        algo2[degree-1] += algorithm2.count // num_trials  
+        algo3[degree-1] += algorithm3.count // num_trials    
+        algo4[degree-1] += algorithm4.count // num_trials    
 
 print(algo1)
 print(algo2)
