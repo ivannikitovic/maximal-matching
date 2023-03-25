@@ -6,7 +6,7 @@ class Algorithm4:
         self.count = 0
         self.memo = {}
 
-    def selected4(self, e: tuple[int], G: Graph):
+    def selected4(self, e: tuple[int], G: Graph) -> bool:
         """
         Inputs
         --------------------

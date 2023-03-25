@@ -5,7 +5,7 @@ class Algorithm3:
     def __init__(self) -> None:
         self.count = 0
 
-    def selected3(self, e: tuple[int], G: Graph):
+    def selected3(self, e: tuple[int], G: Graph) -> bool:
         """
         Inputs
         --------------------

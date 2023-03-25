@@ -5,8 +5,13 @@ class Graph:
 
     def __init__(self, num_nodes: int) -> None:
         """
+        Inputs
+        --------------------
 
-        """
+        num_nodes: int
+            Number of nodes (vertices) to initialize the graph with.
+
+        """ 
         self.n = num_nodes
 
         self.adj = [[0 for _ in range(self.n)] for _ in range(self.n)]
@@ -25,6 +30,19 @@ class Graph:
         return result
     
     def generate_random_graph(self, degree: int, method : str = "union") -> None:
+        """
+        Inputs
+        --------------------
+
+        degree: int
+            The approximate degree of the resulting
+            randomly generated graph.
+
+        method: str
+            The method used to generate the graph. \n
+            `union` and `euclidean` are currently supported
+
+        """
         if method == "union":
             random_matchings = []
 
@@ -63,9 +81,16 @@ class Graph:
                     self.adj[i][j] = 1
                     self.adj[j][i] = 1
                     
-    def assign_random_values_to_edges(self, seed=None) -> None:
+    def assign_random_values_to_edges(self, seed : int | float | str | bytes | bytearray | None = None) -> None:
         """
-        
+        Inputs
+        --------------------
+
+        seed: int | float | str | bytes | bytearray
+            Seed to use to assign random values to edges.
+            These random values are used for stochastic algorithms
+            finding maximal matching sets.
+
         """
         if seed:
             random.seed(seed)
@@ -81,7 +106,18 @@ class Graph:
 
     def get_adjacent_edges(self, e: tuple[int]) -> list[tuple[int]]:
         """
-        
+        Inputs
+        --------------------
+
+        e: tuple[int]
+            Denoted an edge `e` in the graph.
+
+        Outputs
+        --------------------
+
+        neighbors: list[tuple[int]]
+            `e`'s adjacent edges.
+
         """
         idx1, idx2 = e
 
@@ -98,7 +134,12 @@ class Graph:
     
     def get_all_edges(self) -> list[tuple[int]]:
         """
-        
+        Outputs
+        --------------------
+
+        all_edges: list[tuple[int]]
+            Returns a set of all edges in the graph.
+
         """
         result = set()
 

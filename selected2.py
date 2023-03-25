@@ -6,7 +6,7 @@ class Algorithm2:
     def __init__(self) -> None:
         self.count = 0
 
-    def selected2(self, e: tuple[int], G: Graph):
+    def selected2(self, e: tuple[int], G: Graph) -> bool:
         """
         Inputs
         --------------------
